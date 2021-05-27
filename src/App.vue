@@ -1,92 +1,47 @@
 <template>
-  <v-app id="inspire">
-    <v-navigation-drawer
-    v-model="drawer"
-    app>
-      <v-list-item>
-        <v-list-item-content>
-          <v-list-item-title class="title">
-            🛒 Shopping List
-          </v-list-item-title>
-          <v-list-item-subtitle>
-            Best Shopping Cart Ever
-          </v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
+  <v-app id="app">
+    <Header />
+    <DrawerNav />
 
-      <v-divider></v-divider>
+    <v-main id="main">
+      <v-container fluid>
+        <router-view></router-view>
+      </v-container>
 
-      <v-list
-        dense
-        nav
-      >
-        <v-list-item
-          v-for="item in items"
-          :key="item.title"
-          :to="item.to"
-          link
-        >
-          <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-icon>
-
-          <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-
-    <v-app-bar
-      app
-      prominent
-      color="#E91E63"
-      dark
-    >
-      <template v-slot:img="{ props }">
-        <v-img
-          v-bind="props"
-          
-        ></v-img>
-      </template>
-
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-
-      <v-app-bar-title>🛒 Shopping List</v-app-bar-title>
-
-      <v-spacer></v-spacer>
-
-      <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
-
-      <v-btn icon>
-        <v-icon>mdi-heart</v-icon>
-      </v-btn>
-
-      <v-btn icon>
-        <v-icon>mdi-dots-vertical</v-icon>
-      </v-btn>
-    </v-app-bar>
-
-    <v-main>
-      <router-view></router-view>
-      <snackbar />
+      <snack-bar />
     </v-main>
+
+    <Footer />
   </v-app>
 </template>
 
 <script>
-import SnackBar from './components/Shared/SnackBar.vue'
-  export default {
-    data: () => ({ 
-      drawer: null,
-      items: [
-          { title: 'Todo', icon: 'mdi-format-list-checks', to: '/' },
-          { title: 'About', icon: 'mdi-help-box', to: '/about' },
-        ]}),
-    components : {
-      'snackbar' : require('@/components/Shared/SnackBar.vue').default
-    }
+const SnackBar = () => import("@/components/Shared/SnackBar.vue");
+import Header from "@/components/Main/Header.vue";
+const DrawerNav = () => import("@/components/Main/DrawerNav.vue");
+import Footer from "@/components/Main/Footer.vue";
+
+export default {
+  components: {
+    SnackBar,
+    Header,
+    DrawerNav,
+    Footer
+  },
+  created() {
+    this.$store.dispatch("FETCH_SECTIONS");
+    this.$store.dispatch("SET_CLIPBOARD_DATA");
   }
+};
 </script>
+
+<style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+#app {
+  width: 100%;
+  font-family: "Noto Sans JP", "Roboto", sans-serif;
+  background-color: #fafafa;
+}
+</style>
