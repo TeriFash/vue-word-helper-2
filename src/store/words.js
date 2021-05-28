@@ -92,9 +92,10 @@ const actions = {
     try {
       const { section, id } = payload;
       const sectionsDB = this._vm.$db.collection("sections").doc(section);
+      const locId = id + 1;
       // console.log(' ---➜ id ', id)
       await sectionsDB.update({
-        [id]: firebase.firestore.FieldValue.delete()
+        [locId]: firebase.firestore.FieldValue.delete()
       });
 
       console.log("Document successfully written!");

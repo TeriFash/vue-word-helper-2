@@ -1,6 +1,7 @@
 <template>
   <div class="words px-4">
     <field-add-word />
+    <!-- <v-breadcrumbs divider="/"></v-breadcrumbs> -->
     <tabs-word v-if="!$store.state.words.sections.length" />
     <no-words v-else class="no-task" />
   </div>
@@ -16,6 +17,9 @@ export default {
     FieldAddWord,
     TabsWord,
     NoWords
+  },
+  mounted() {
+    // console.log(" ---➜ l ", this.$router.options.routes);
   }
 };
 </script>

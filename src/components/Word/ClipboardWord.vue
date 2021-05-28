@@ -93,7 +93,7 @@ export default {
       // });
       try {
         const tab = tabActive.split("-");
-        await this.deleteWord({ id: this.textKey[0] + 1, section: tab[1] });
+        await this.deleteWord({ id: this.textKey[0], section: tab[1] });
         await this.$copyText(this.$refs.text.innerHTML);
         this.$emit("dialog", "success");
       } catch (error) {

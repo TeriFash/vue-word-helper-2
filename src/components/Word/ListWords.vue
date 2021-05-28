@@ -89,7 +89,6 @@ export default {
     },
     onWindowBlur() {
       clearInterval(this.polling);
-      console.log("--- polling", this.polling);
     }
   }
 };

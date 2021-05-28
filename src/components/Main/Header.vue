@@ -3,7 +3,7 @@
   <v-app-bar hide-on-scroll elevate-on-scroll app color="secondary" dark>
     <v-app-bar-nav-icon @click="navDrawer = !navDrawer" />
 
-    <v-toolbar-title class="pl-0">{{ info.title }} {{ $route.name }}</v-toolbar-title>
+    <v-toolbar-title class="pl-0"> <v-icon>{{getIconTitle}}</v-icon> {{ info.title }} {{ $route.name }}</v-toolbar-title>
 
     <v-spacer />
 
@@ -55,6 +55,25 @@ export default {
   },
   computed: {
     ...mapGetters({ info: "getMenuInfo" }),
+    getIconTitle() {
+      let result;
+      switch (this.$route.name) {
+        case "Words":
+          result = "mdi-file-eye";
+          break;
+        case "Todo":
+        case "/":
+          result = "mdi-briefcase-edit";
+          break;
+        case "About":
+          result = "mdi-unicorn";
+          break;
+        default:
+          result = "mdi-code-braces-box";
+          break;
+      }
+      return result
+    },
 
     navDrawer: {
       get() {

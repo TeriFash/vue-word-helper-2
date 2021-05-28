@@ -1,6 +1,6 @@
 const state = {
   drawer: false,
-  menuTitle: '🛒 List',
+  menuTitle: 'List',
   menuDesc: 'Best tools app',
   menuList: [
     { title: "Todo", icon: "mdi-format-list-checks", to: "/" },

@@ -15,6 +15,12 @@ const firebaseConfig = {
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
+firebase
+  .firestore()
+  .enablePersistence({ synchronizeTabs: !0 })
+  .catch(() => {
+    console.warn("DB offline support not available");
+  });
 const db = firebase.firestore();
 
 async function getSections() {
