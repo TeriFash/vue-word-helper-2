@@ -9,7 +9,7 @@ const firebaseConfig = {
   projectId: process.env.VUE_APP_FIREBASE_PROJECT_ID,
   storageBucket: process.env.VUE_APP_FIREBASE_STORAGE_BUCKET,
   messagingSenderId: process.env.VUE_APP_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.VUE_APP_FIREBASE_APP_ID,
+  appId: process.env.VUE_APP_FIREBASE_APP_ID
   // measurementId: process.env.VUE_APP_FIREBASE_MEASUREMENT_ID
 };
 
@@ -17,22 +17,30 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
-  async function getSections() {
-    const result = [];
-    try {
-      await db.collection('sections').get().then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          result.push(doc.data());
+async function getSections() {
+  let result = [];
+  try {
+    await db
+      .collection("sections")
+      .get()
+      .then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+          let dataMap = doc.data();
+          let dataVal = Object.entries(dataMap).map(item => item[1]);
+          let data = { [doc.id]: dataVal };
+
+          result.push(data);
         });
       });
-      const [data] = result
-      return data
-    } catch (error) {
-      console.log(error.message);
-      throw error;
-    }
-  }
 
-  Vue.prototype.$db = getSections()
+    return result;
+  } catch (error) {
+    console.log(error.message);
+    throw error;
+  }
+}
+
+Vue.prototype.$db = db;
+Vue.prototype.$sections = getSections();
 
 export default firebase;

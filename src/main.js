@@ -8,10 +8,7 @@ import firebase from "./plugins/firebase";
 import VueClipboard from "vue-clipboard2";
 
 Vue.config.productionTip = false;
-// const db = collection;
-// Vue.prototype.$db = db;
 Vue.use(VueClipboard);
-// Vue.use(vuetify);
 
 new Vue({
   router,

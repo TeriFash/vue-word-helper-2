@@ -8,10 +8,7 @@
 
       <v-divider />
 
-      <v-card-text class="white--text">
-        {{ new Date().getFullYear() }} —
-        <strong>TERI FASH</strong> LAB.
-      </v-card-text>
+      <v-card-text class="white--text"> {{ new Date().getFullYear() }} — <strong>TERI FASH</strong> LAB. </v-card-text>
     </v-container>
   </v-footer>
 </template>

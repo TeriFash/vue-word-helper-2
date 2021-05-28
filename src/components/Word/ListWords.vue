@@ -7,6 +7,7 @@
         :key="i"
         :hendler="hendlerText || clipboarText || isHeader"
         :text="word.text"
+        :textKey="[i, words.length]"
       />
     </v-list>
     <DialogInfo @snackbar:close="close" :snackbar="showDialog" :text="textDialog" :type="type"></DialogInfo>
@@ -47,6 +48,14 @@ export default {
       }
     }
   },
+  mounted() {
+    window.addEventListener("focus", this.onWindowFocuse);
+    window.addEventListener("blur", this.onWindowBlur);
+  },
+  beforeDestroy() {
+    window.removeEventListener("focus", this.onWindowFocuse);
+    window.removeEventListener("blur", this.onWindowBlur);
+  },
   computed: {
     ...mapState(["textInClipboard"]),
     ...mapGetters(["getClipboardData"]),
@@ -75,14 +84,10 @@ export default {
         this.SET_CLIPBOARD_DATA();
       }, 4000);
     },
-    onWindowFocuse(event) {
-      console.log("--- onWindowFocuse", event);
-
+    onWindowFocuse() {
       this.onClipParse();
     },
-    onWindowBlur(event) {
-      console.log("--- onWindowBlur", event);
-
+    onWindowBlur() {
       clearInterval(this.polling);
       console.log("--- polling", this.polling);
     }

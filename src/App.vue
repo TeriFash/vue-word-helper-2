@@ -2,17 +2,14 @@
   <v-app id="app">
     <Header />
     <DrawerNav />
-
     <v-main id="main">
       <v-container fluid>
         <keep-alive>
           <router-view></router-view>
         </keep-alive>
       </v-container>
-
       <snack-bar />
     </v-main>
-
     <Footer />
   </v-app>
 </template>
@@ -29,9 +26,9 @@ export default {
       refreshing: false
     };
   },
-  // beforeCreate() {
-  //   localStorage.getItem("darkMode") == "true" ? (this.$vuetify.theme.dark = true) : (this.$vuetify.theme.dark = false);
-  // },
+  beforeCreate() {
+    localStorage.getItem("darkMode") == "true" ? (this.$vuetify.theme.dark = true) : (this.$vuetify.theme.dark = false);
+  },
   created() {
     // Listen for swUpdated event and display refresh snackbar as required.
     document.addEventListener("swUpdated", this.showRefreshUI, { once: true });
