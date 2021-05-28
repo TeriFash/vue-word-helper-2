@@ -34,13 +34,13 @@ export default {
     };
   },
   watch: {
-    "$store.state.textInputName": {
+    "$store.state.words.textInputName": {
       immediate: true,
       handler(newValue) {
         this.hendlerText = newValue;
       }
     },
-    "$store.state.textInClipboard": {
+    "$store.state.words.textInClipboard": {
       immediate: true,
       handler(newValue) {
         this.clipboarText = newValue;

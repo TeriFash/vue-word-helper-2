@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer v-model="$store.state.menu.drawer" app>
+  <v-navigation-drawer  mobile-breakpoint="600" v-model="$store.state.menu.drawer" app dark>
     <v-list-item>
       <v-list-item-content>
         <v-list-item-title class="title">{{ info.title }}</v-list-item-title>

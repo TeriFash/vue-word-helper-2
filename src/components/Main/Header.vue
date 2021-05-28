@@ -1,18 +1,54 @@
+/* eslint-disable vue/no-parsing-error */
 <template>
-  <v-app-bar app prominent color="#E91E63" dark>
-    <!-- <template v-slot:img="{ props }">
-      <v-img v-bind="props"></v-img>
-    </template>-->
+  <v-app-bar
+    hide-on-scroll
+    elevate-on-scroll
+    app
+    color="accent"
+    dark
+  >
+    <v-app-bar-nav-icon @click="navDrawer = !navDrawer" />
 
-    <v-app-bar-nav-icon @click="navDrawer = !navDrawer"></v-app-bar-nav-icon>
+    <v-toolbar-title>{{ info.title }} {{ $route.name }}</v-toolbar-title>
 
-    <v-app-bar-title>{{ info.title }} {{ $route.name }}</v-app-bar-title>
+    <v-spacer />
 
-    <v-spacer></v-spacer>
-
-    <v-btn :key="i" icon v-for="(item, i) in icons">
-      <v-icon>{{item.icon}}</v-icon>
+    <v-btn
+      v-for="(item, i) in icons"
+      :key="i"
+      icon
+    >
+      <v-icon>{{ item.icon }}</v-icon>
     </v-btn>
+
+    <v-btn
+      icon
+      class="ml-1"
+      aria-label="Theme Switch"
+      @click="setDarkMode"
+    >
+      <v-icon v-if="this.$vuetify.theme.dark">
+        mdi-brightness-7
+      </v-icon>
+      <v-icon v-else>
+        mdi-brightness-4
+      </v-icon>
+    </v-btn>
+
+    <!-- <v-switch
+      v-model="darkMode"
+      color="primary dark"
+      class=""
+      hide-details
+    >
+      v-slot:label 
+      <v-icon
+        right
+        class="ml-1"
+      >
+        mdi-weather-night
+      </v-icon>
+    </v-switch> -->
   </v-app-bar>
 </template>
 
@@ -22,17 +58,18 @@ export default {
   name: "Header",
   data() {
     return {
+      darkMode: true,
       icons: [
         {
-          icon: "mdi-magnify"
+          icon: "mdi-magnify",
         },
         {
-          icon: "mdi-heart"
+          icon: "mdi-heart",
         },
         {
-          icon: "mdi-dots-vertical"
-        }
-      ]
+          icon: "mdi-dots-vertical",
+        },
+      ],
     };
   },
   computed: {
@@ -44,12 +81,30 @@ export default {
       },
       set(val) {
         this.toggle(val);
-      }
-    }
+      },
+    },
+  },
+  watch: {
+    darkMode() {
+      this.darkMode
+        ? (this.$vuetify.theme.dark = true)
+        : (this.$vuetify.theme.dark = false);
+    },
   },
   methods: {
-    ...mapMutations(["toggle"])
-  }
+    ...mapMutations(["toggle"]),
+    setDarkMode() {
+      let metaThemeColor = document.querySelector("meta[name=theme-color]");
+      this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
+      if (localStorage)
+        localStorage.setItem("darkMode", this.$vuetify.theme.dark);
+      if (this.$vuetify.theme.dark) {
+        metaThemeColor.setAttribute("content", "#212121");
+      } else {
+        metaThemeColor.setAttribute("content", "#0277bd");
+      }
+    },
+  },
 };
 </script>
 

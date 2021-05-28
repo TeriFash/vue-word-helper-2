@@ -1,0 +1,14 @@
+@font-face {
+  font-family: google-sans;
+  src: url(../assets/fonts/google-font.woff2);
+  font-display: swap;
+}
+
+@import "./variables.scss";
+
+.google-font {
+  font-family: google-sans;
+}
+html {
+  overflow-x: hidden;
+}

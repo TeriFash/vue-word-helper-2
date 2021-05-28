@@ -1,7 +1,7 @@
 <template>
   <div class="words px-4">
     <field-add-word />
-    <tabs-word v-if="!$store.state.sections.length" />
+    <tabs-word v-if="!$store.state.words.sections.length" />
     <no-words v-else class="no-task" />
   </div>
 </template>

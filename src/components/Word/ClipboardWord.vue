@@ -22,30 +22,30 @@ export default {
   props: {
     hendler: {
       type: String,
-      default: ""
+      default: "",
     },
     text: {
       type: String,
-      default: ""
+      default: "",
     },
     textKey: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
 
   data() {
     return {
       isDblclick: false,
       dialogs: {
-        delete: false
-      }
+        delete: false,
+      },
     };
   },
   computed: {
     nameDownLine() {
       return this.textKey;
-    }
+    },
   },
   methods: {
     setText(val) {
@@ -63,8 +63,8 @@ export default {
       } catch (error) {
         this.$emit("dialog", "error");
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -72,6 +72,10 @@ export default {
 .clipboard-select p {
   -webkit-user-select: all;
   user-select: all;
+
+  span {
+    opacity: 0.5;
+  }
 
   &:focus {
     outline: none;

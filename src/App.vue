@@ -5,7 +5,9 @@
 
     <v-main id="main">
       <v-container fluid>
-        <router-view></router-view>
+        <keep-alive>
+          <router-view></router-view>
+        </keep-alive>
       </v-container>
 
       <snack-bar />
@@ -22,26 +24,31 @@ const DrawerNav = () => import("@/components/Main/DrawerNav.vue");
 import Footer from "@/components/Main/Footer.vue";
 
 export default {
+  data() {
+    return {
+      refreshing: false
+    };
+  },
+  // beforeCreate() {
+  //   localStorage.getItem("darkMode") == "true" ? (this.$vuetify.theme.dark = true) : (this.$vuetify.theme.dark = false);
+  // },
+  created() {
+    // Listen for swUpdated event and display refresh snackbar as required.
+    document.addEventListener("swUpdated", this.showRefreshUI, { once: true });
+    // Refresh all open app tabs when a new service worker is installed.
+    navigator.serviceWorker.addEventListener("controllerchange", () => {
+      if (this.refreshing) return;
+      this.refreshing = true;
+      window.location.reload();
+    });
+  },
   components: {
     SnackBar,
     Header,
     DrawerNav,
     Footer
-  },
-  created() {
-    this.$store.dispatch("FETCH_SECTIONS");
-    this.$store.dispatch("SET_CLIPBOARD_DATA");
   }
 };
 </script>
 
-<style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
-
-#app {
-  width: 100%;
-  font-family: "Noto Sans JP", "Roboto", sans-serif;
-  background-color: #fafafa;
-}
-</style>
+<style lang="scss"></style>
