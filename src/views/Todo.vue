@@ -1,22 +1,32 @@
 <template>
   <div class="home">
-    <field-add-task />
-    <list-tasks v-if="$store.state.todos.tasks.length" />
-    <no-task v-else class="no-task" />
+    <FieldAddTask />
+    <ListTasks v-if="$store.state.todos.tasks.length" />
+    <DataEmpty v-else text="No todos this" class="no-todo" />
   </div>
 </template>
 
 <script>
-const FieldAddTask = () => import('@/components/Todo/FieldAddTask.vue');
-const ListTasks = () => import('@/components/Todo/ListTasks.vue');
-const NoTask = () => import('@/components/Todo/NoTask.vue');
+const FieldAddTask = () => import("@/components/Todo/FieldAddTask");
+const ListTasks = () => import("@/components/Todo/ListTasks");
+const DataEmpty = () => import("@/components/Global/DataEmpty");
 
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
-    NoTask,
+    DataEmpty,
     ListTasks,
-    FieldAddTask,
-  },
+    FieldAddTask
+  }
 };
 </script>
+
+<style scoped>
+.no-todo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.5;
+}
+</style>

@@ -16,8 +16,8 @@
 
 <script>
 import { mapGetters, mapActions, mapState } from "vuex";
-const DialogInfo = () => import("@/components/Main/DialogInfo.vue");
-const ClipboardWord = () => import("@/components/Word/ClipboardWord.vue");
+const DialogInfo = () => import("@/components/Global/DialogInfo");
+const ClipboardWord = () => import("@/components/Word/ClipboardWord");
 export default {
   props: ["words"],
   components: {

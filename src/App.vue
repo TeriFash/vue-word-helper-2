@@ -8,14 +8,14 @@
           <router-view></router-view>
         </keep-alive>
       </v-container>
-      <snack-bar />
+      <SnackBar />
     </v-main>
     <Footer />
   </v-app>
 </template>
 
 <script>
-const SnackBar = () => import("@/components/Shared/SnackBar.vue");
+const SnackBar = () => import("@/components/Global/SnackBar.vue");
 import Header from "@/components/Main/Header.vue";
 const DrawerNav = () => import("@/components/Main/DrawerNav.vue");
 import Footer from "@/components/Main/Footer.vue";
@@ -30,6 +30,8 @@ export default {
     localStorage.getItem("darkMode") == "true" ? (this.$vuetify.theme.dark = true) : (this.$vuetify.theme.dark = false);
   },
   created() {
+    this.$store.dispatch("FETCH_SECTIONS");
+    this.$store.dispatch("SET_CLIPBOARD_DATA");
     // Listen for swUpdated event and display refresh snackbar as required.
     document.addEventListener("swUpdated", this.showRefreshUI, { once: true });
     // Refresh all open app tabs when a new service worker is installed.

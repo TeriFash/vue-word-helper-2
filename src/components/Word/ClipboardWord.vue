@@ -82,15 +82,7 @@ export default {
     },
     async doDelete() {
       const tabActive = this.$store.state.words.tabActive;
-      // let documentRef = this.$db.collection("sections").doc("rare");
-      // documentRef.get().then(querySnapshot => {
-      //   let createTime = querySnapshot.data();
-      //   console.log("Document created ", Object.keys(createTime).length);
 
-      // if (documentSnapshot.exists) {
-      //   let createTime = documentSnapshot.createTime;
-      // }
-      // });
       try {
         const tab = tabActive.split("-");
         await this.deleteWord({ id: this.textKey[0], section: tab[1] });
