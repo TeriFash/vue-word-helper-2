@@ -1,56 +1,71 @@
 module.exports = {
-  root: true,
   env: {
-    es6: true,
-    node: true
+    browser: true,
+    // "es2021": true,
+    node: true,
   },
   extends: [
-    "eslint:recommended",
-    "plugin:prettier/recommended",
-    "plugin:vue/essential",
-    // 'prettier',
-    "@vue/prettier"
+    'plugin:vue/recommended',
+    'plugin:vue/strongly-recommended',
+    'eslint:recommended',
+    '@vue/prettier',
+    'prettier',
+    'prettier/vue',
+    'plugin:prettier/recommended',
   ],
-  parser: "vue-eslint-parser",
+  parser: 'vue-eslint-parser',
   parserOptions: {
-    parser: "babel-eslint"
+    parser: 'babel-eslint',
+    ecmaVersion: 12,
+    sourceType: 'module',
+    // vueFeatures: {
+    //   filter: true,
+    //   interpolationAsNonHTML: false,
+    // },
   },
+  plugins: ['vue', 'prettier'],
   rules: {
-    "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
-    "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
-    // "prettier/prettier": ["error", {"singleQuote": true, "parser": "flow"}],
-    "prettier/prettier": [
-      "error",
+    // 'vue/html-indent': 'off',
+    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'prettier/prettier': 'error',
+    quotes: ['error', 'single'],
+    semi: ['error', 'never'],
+    // 'vue/attribute-hyphenation': ['error', 'always'],
+    // 'vue/html-closing-bracket-newline': [
+    //   'error',
+    //   {
+    //     singleline: 'never',
+    //     multiline: 'always',
+    //   },
+    // ],
+    // 'vue/html-indent': [
+    //   'error',
+    //   type,
+    //   {
+    //     attribute: 1,
+    //     baseIndent: 0,
+    //     closeBracket: 0,
+    //     alignAttributesVertically: true,
+    //   },
+    // ],
+    // 'vue/html-closing-bracket-newline': [
+    //   'error',
+    //   {
+    //     singleline: 'never',
+    //     multiline: 'always',
+    //   },
+    // ],
+    'vue/singleline-html-element-content-newline': [
+      'error',
       {
-        endOfLine: "auto"
-      }
+        ignoreWhenNoAttributes: true,
+        ignoreWhenEmpty: true,
+        ignores: ['pre', 'textarea'],
+      },
     ],
-    "vue/html-self-closing": [
-      "error",
-      {
-        html: {
-          void: "always",
-          normal: "never"
-        }
-      }
-    ],
-    "vue/html-closing-bracket-newline": [
-      "error",
-      {
-        singleline: "never",
-        multiline: "always"
-      }
-    ],
-    "vue/html-indent": [
-      "error",
-      type,
-      {
-        attribute: 1,
-        baseIndent: 0,
-        closeBracket: 0,
-        alignAttributesVertically: true
-      }
-    ]
+
+    // 'arrow-body-style': 'off',
+    // 'prefer-arrow-callback': 'off',
   },
-  plugins: ["vue", "prettier"]
-};
+}
