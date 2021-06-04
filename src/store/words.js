@@ -131,19 +131,15 @@ const actions = {
     // const result = [];
     try {
       const result = await this._vm.$sections
-
       let resultVal = {}
       result.forEach(item => {
         const [data] = Object.values(item)
         resultVal[Object.keys(item)] = data
       })
 
-      const { simple, accompanying, rare } = resultVal
-      console.log(' ---➜ resultVal ', resultVal)
-
       // let resultSorte = Object.fromEntries(Object.entries(result).sort((a, b) => b[1].length - a[1].length));
 
-      commit('LOAD_SECTIONS', { simple, accompanying, rare })
+      commit('LOAD_SECTIONS', resultVal)
     } catch (error) {
       console.log(error.message)
       throw error
@@ -194,7 +190,10 @@ const actions = {
 
 const getters = {
   getDataList: state => state.data,
-  getSectionsList: state => state.sections,
+  getSectionsList: state => {
+    const { simple, accompanying, rare } = state.sections
+    return { simple, accompanying, rare }
+  },
   getClipboardData: state => state.textInClipboard,
 }
 
