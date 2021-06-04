@@ -2,94 +2,99 @@
   <div>
     <v-list flat class="pt-0">
       <ClipboardWord
-        @dialog="onDialog"
         v-for="(word, i) in words"
         :key="i"
         :hendler="hendlerText || clipboarText || isHeader"
         :text="word.text"
-        :textKey="[i, words.length]"
+        :text-key="[i, words.length]"
+        @dialog="onDialog"
       />
     </v-list>
-    <DialogInfo @snackbar:close="close" :snackbar="showDialog" :text="textDialog" :type="type"></DialogInfo>
+    <DialogInfo
+      :snackbar="showDialog"
+      :text="textDialog"
+      :type="type"
+      @snackbar:close="close"
+    ></DialogInfo>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions, mapState } from "vuex";
-const DialogInfo = () => import("@/components/Global/DialogInfo");
-const ClipboardWord = () => import("@/components/Word/ClipboardWord");
+import { mapGetters, mapActions, mapState } from 'vuex'
+const DialogInfo = () => import('@/components/Global/DialogInfo')
+const ClipboardWord = () => import('@/components/Word/ClipboardWord')
 export default {
-  props: ["words"],
   components: {
     ClipboardWord,
-    DialogInfo
+    DialogInfo,
   },
+  props: ['words'],
   data() {
     return {
       showDialog: false,
-      textDialog: "",
-      type: "",
-      hendlerText: "",
-      clipboarText: "",
-      polling: null
-    };
+      textDialog: '',
+      type: '',
+      hendlerText: '',
+      clipboarText: '',
+      polling: null,
+    }
   },
   watch: {
-    "$store.state.words.textInputName": {
+    '$store.state.words.textInputName': {
       immediate: true,
       handler(newValue) {
-        this.hendlerText = newValue;
-      }
+        this.hendlerText = newValue
+      },
     },
-    "$store.state.words.textInClipboard": {
+    '$store.state.words.textInClipboard': {
       immediate: true,
       handler(newValue) {
-        this.clipboarText = newValue;
-      }
-    }
+        this.clipboarText = newValue
+      },
+    },
   },
   mounted() {
-    window.addEventListener("focus", this.onWindowFocuse);
-    window.addEventListener("blur", this.onWindowBlur);
+    window.addEventListener('focus', this.onWindowFocuse)
+    window.addEventListener('blur', this.onWindowBlur)
   },
   beforeDestroy() {
-    window.removeEventListener("focus", this.onWindowFocuse);
-    window.removeEventListener("blur", this.onWindowBlur);
+    window.removeEventListener('focus', this.onWindowFocuse)
+    window.removeEventListener('blur', this.onWindowBlur)
   },
   computed: {
-    ...mapState(["textInClipboard"]),
-    ...mapGetters(["getClipboardData"]),
+    ...mapState(['textInClipboard']),
+    ...mapGetters(['getClipboardData']),
     isHeader() {
-      return this.getClipboardData || "";
-    }
+      return this.getClipboardData || ''
+    },
   },
   methods: {
-    ...mapActions(["SET_CLIPBOARD_DATA"]),
+    ...mapActions(['SET_CLIPBOARD_DATA']),
     close(e) {
-      this.showDialog = e;
+      this.showDialog = e
     },
     onDialog(type) {
-      if (type === "success") {
-        this.textDialog = "Success текст добавлен в буфер обмена";
-        this.showDialog = true;
-        this.type = "success";
+      if (type === 'success') {
+        this.textDialog = 'Success текст добавлен в буфер обмена'
+        this.showDialog = true
+        this.type = 'success'
       } else {
-        this.textDialog = "Error текст не добавлен";
-        this.showDialog = true;
-        this.type = "error";
+        this.textDialog = 'Error текст не добавлен'
+        this.showDialog = true
+        this.type = 'error'
       }
     },
     async onClipParse() {
       this.polling = await setInterval(() => {
-        this.SET_CLIPBOARD_DATA();
-      }, 4000);
+        this.SET_CLIPBOARD_DATA()
+      }, 4000)
     },
     onWindowFocuse() {
-      this.onClipParse();
+      this.onClipParse()
     },
     onWindowBlur() {
-      clearInterval(this.polling);
-    }
-  }
-};
+      clearInterval(this.polling)
+    },
+  },
+}
 </script>

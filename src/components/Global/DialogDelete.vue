@@ -3,8 +3,8 @@
     <v-card>
       <v-card-title class="headline"> Delete this item? </v-card-title>
       <v-card-text
-        >By clicking <strong>YES</strong> you understand that the task will be removed from the database and this fuction is
-        irreversible.</v-card-text
+        >By clicking <strong>YES</strong> you understand that the task will be
+        removed from the database and this fuction is irreversible.</v-card-text
       >
       <v-card-actions>
         <v-spacer></v-spacer>
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-export default {};
+export default {}
 </script>
 
 <style></style>

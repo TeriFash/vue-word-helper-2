@@ -1,22 +1,24 @@
 <template>
   <div class="no-data">
-    <v-icon size="100px" color="primary">mdi-check</v-icon>
-    <div class="text-h5 primary--text">{{ text }}</div>
+    <v-icon size="100px" color="primary"> mdi-check </v-icon>
+    <div class="text-h5 primary--text">
+      {{ text }}
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "DataEmpty",
+  name: 'DataEmpty',
   props: {
     hendler: {
       type: String,
-      default: ""
+      default: '',
     },
     text: {
       type: String,
-      default: ""
-    }
-  }
-};
+      default: '',
+    },
+  },
+}
 </script>

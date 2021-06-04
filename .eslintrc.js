@@ -31,7 +31,7 @@ module.exports = {
     'prettier/prettier': 'error',
     quotes: ['error', 'single'],
     semi: ['error', 'never'],
-    // 'vue/attribute-hyphenation': ['error', 'always'],
+    'vue/attribute-hyphenation': ['error', 'always'],
     // 'vue/html-closing-bracket-newline': [
     //   'error',
     //   {
@@ -39,6 +39,14 @@ module.exports = {
     //     multiline: 'always',
     //   },
     // ],
+    'vue/singleline-html-element-content-newline': [
+      'error',
+      {
+        ignoreWhenNoAttributes: true,
+        ignoreWhenEmpty: true,
+        ignores: ['pre', 'textarea'],
+      },
+    ],
     // 'vue/html-indent': [
     //   'error',
     //   type,
@@ -56,15 +64,6 @@ module.exports = {
     //     multiline: 'always',
     //   },
     // ],
-    'vue/singleline-html-element-content-newline': [
-      'error',
-      {
-        ignoreWhenNoAttributes: true,
-        ignoreWhenEmpty: true,
-        ignores: ['pre', 'textarea'],
-      },
-    ],
-
     // 'arrow-body-style': 'off',
     // 'prefer-arrow-callback': 'off',
   },

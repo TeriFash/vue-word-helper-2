@@ -7,18 +7,18 @@
 </template>
 
 <script>
-const FieldAddTask = () => import("@/components/Todo/FieldAddTask");
-const ListTasks = () => import("@/components/Todo/ListTasks");
-const DataEmpty = () => import("@/components/Global/DataEmpty");
+const FieldAddTask = () => import('@/components/Todo/FieldAddTask')
+const ListTasks = () => import('@/components/Todo/ListTasks')
+const DataEmpty = () => import('@/components/Global/DataEmpty')
 
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
     DataEmpty,
     ListTasks,
-    FieldAddTask
-  }
-};
+    FieldAddTask,
+  },
+}
 </script>
 
 <style scoped>

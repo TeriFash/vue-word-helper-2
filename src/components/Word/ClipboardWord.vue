@@ -8,12 +8,22 @@
 
         <v-list-item-action>
           <v-btn icon>
-            <v-icon @click="doDelete" color="red lighten-1" class="btn-clipboard">mdi-delete-empty-outline</v-icon>
+            <v-icon
+              color="red lighten-1"
+              class="btn-clipboard"
+              @click="doDelete"
+              >mdi-delete-empty-outline</v-icon
+            >
           </v-btn>
         </v-list-item-action>
         <v-list-item-action>
           <v-btn icon :disabled="!hendler">
-            <v-icon @click="doCopy" color="green lighten-1" class="btn-clipboard">mdi-content-copy</v-icon>
+            <v-icon
+              color="green lighten-1"
+              class="btn-clipboard"
+              @click="doCopy"
+              >mdi-content-copy</v-icon
+            >
           </v-btn>
         </v-list-item-action>
       </template>
@@ -23,77 +33,81 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
-import { firebase } from "@firebase/app";
-import "@firebase/firestore";
+import { mapActions } from 'vuex'
+import { firebase } from '@firebase/app'
+import '@firebase/firestore'
 
 export default {
   props: {
     hendler: {
       type: String,
-      default: ""
+      default: '',
     },
     text: {
       type: String,
-      default: ""
+      default: '',
     },
     textKey: {
-      type: Array
-    }
+      type: Array,
+    },
   },
 
   data() {
     return {
       isDblclick: false,
       dialogs: {
-        delete: false
-      }
-    };
+        delete: false,
+      },
+    }
   },
   computed: {
     setLine() {
-      const index = this.textKey[0] + 1;
+      const index = this.textKey[0] + 1
 
-      return index < this.textKey[1];
-    }
+      return index < this.textKey[1]
+    },
   },
   methods: {
-    ...mapActions({ deleteWord: "DELETE_WORD" }),
+    ...mapActions({ deleteWord: 'DELETE_WORD' }),
     setText(val) {
       const opt = {
-        name: "{ }",
-        nameCompany: "{ $2 }",
-        titleOffer: "{ $1 }",
-        cost: "{ $cost }",
-        time: "{ $time }"
-      };
-      const newHeader = `<span class='mark'>${this.hendler ? this.hendler : "{ name }"}</span>`;
-      const newHeaderFixer = `${newHeader[0].toUpperCase()}${newHeader.slice(1)}`;
-      const newText = val.replace(opt.name, newHeaderFixer);
-      return `${newText}`;
+        name: '{ }',
+        nameCompany: '{ $2 }',
+        titleOffer: '{ $1 }',
+        cost: '{ $cost }',
+        time: '{ $time }',
+      }
+      const newHeader = `<span class='mark'>${
+        this.hendler ? this.hendler : '{ name }'
+      }</span>`
+      const newHeaderFixer = `${newHeader[0].toUpperCase()}${newHeader.slice(
+        1
+      )}`
+      const newText = val.replace(opt.name, newHeaderFixer)
+      return `${newText}`
     },
     async doCopy() {
       try {
-        await this.$copyText(this.$refs.text.innerHTML);
-        this.$emit("dialog", "success");
+        await this.$copyText(this.$refs.text.innerHTML)
+        this.$emit('dialog', 'success')
       } catch (error) {
-        this.$emit("dialog", "error");
+        this.$emit('dialog', 'error')
       }
     },
     async doDelete() {
-      const tabActive = this.$store.state.words.tabActive;
+      const tabActive = this.$store.state.words.tabActive
 
       try {
-        const tab = tabActive.split("-");
-        await this.deleteWord({ id: this.textKey[0], section: tab[1] });
-        await this.$copyText(this.$refs.text.innerHTML);
-        this.$emit("dialog", "success");
+        const tab = tabActive.split('-')
+        await this.deleteWord({ id: this.textKey[0], section: tab[1] })
+        await this.$copyText(this.$refs.text.innerHTML)
+        this.$emit('dialog', 'success')
       } catch (error) {
-        this.$emit("dialog", "error");
+        this.$emit('dialog', 'error')
       }
-    }
-  }
-};
+    },
+  },
+}
 </script>
 
 <style lang="scss">

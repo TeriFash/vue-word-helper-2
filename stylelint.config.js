@@ -5,5 +5,5 @@ module.exports = {
     'stylelint-config-recommended-scss',
   ],
   plugins: [],
-  rules: {}
+  rules: {},
 }

@@ -8,28 +8,28 @@ const routes = [
   {
     path: '*',
     name: 'NotFound',
-    component: () => import('@/views/NotFound.vue')
+    component: () => import('@/views/NotFound.vue'),
   },
   {
     path: '/',
     name: 'Todo',
-    component: Todo
+    component: Todo,
   },
   {
     path: '/about',
     name: 'About',
-    component: () => import('@/views/About.vue')
+    component: () => import('@/views/About.vue'),
   },
   {
     path: '/words',
     name: 'Words',
-    component: () => import('@/views/Words.vue')
-  }
+    component: () => import('@/views/Words.vue'),
+  },
 ]
 
 const router = new VueRouter({
   routes,
-  mode: 'history'
+  mode: 'history',
 })
 
 export default router

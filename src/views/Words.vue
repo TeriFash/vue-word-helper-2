@@ -8,17 +8,17 @@
 </template>
 
 <script>
-const FieldAddWord = () => import("@/components/Word/FieldAddWord.vue");
-const TabsWord = () => import("@/components/Word/TabsWord.vue");
-const DataEmpty = () => import("@/components/Global/DataEmpty");
+const FieldAddWord = () => import('@/components/Word/FieldAddWord.vue')
+const TabsWord = () => import('@/components/Word/TabsWord.vue')
+const DataEmpty = () => import('@/components/Global/DataEmpty')
 export default {
-  name: "Words",
+  name: 'Words',
   components: {
     FieldAddWord,
     TabsWord,
-    DataEmpty
-  }
-};
+    DataEmpty,
+  },
+}
 </script>
 
 <style scoped>

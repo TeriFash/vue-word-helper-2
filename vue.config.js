@@ -1,4 +1,4 @@
-let path = require("path");
+let path = require('path')
 
 module.exports = {
   // configureWebpack: {
@@ -10,14 +10,14 @@ module.exports = {
   //   },
   // },
   chainWebpack: config => {
-    config.plugins.delete("prefetch");
+    config.plugins.delete('prefetch')
   },
   productionSourceMap: false,
   pluginOptions: {
-    "sass-loader": {
-      preProcessor: "sass",
-      patterns: [path.resolve(__dirname, "./src/sass/main.scss")]
-    }
+    'sass-loader': {
+      preProcessor: 'sass',
+      patterns: [path.resolve(__dirname, './src/sass/main.scss')],
+    },
   },
   configureWebpack: {
     plugins: [],
@@ -26,37 +26,37 @@ module.exports = {
         cacheGroups: {
           default: false,
           styles: {
-            name: "styles",
-            test: m => m.constructor.name === "CssModule",
-            chunks: "all",
+            name: 'styles',
+            test: m => m.constructor.name === 'CssModule',
+            chunks: 'all',
             minChunks: 1,
-            enforce: true
+            enforce: true,
           },
           vendor: {
-            name: "vendors",
+            name: 'vendors',
             test: /node_modules/,
-            chunks: "all",
-            enforce: true
-          }
-        }
-      }
-    }
+            chunks: 'all',
+            enforce: true,
+          },
+        },
+      },
+    },
   },
   pwa: {
-    name: "Word Tools",
-    workboxPluginMode: "InjectManifest",
-    themeColor: "#4A90E2",
-    msTileColor: "#4A90E2",
-    appleMobileWebAppCapable: "yes",
-    appleMobileWebAppStatusBarStyle: "black",
+    name: 'Word Tools',
+    workboxPluginMode: 'InjectManifest',
+    themeColor: '#4A90E2',
+    msTileColor: '#4A90E2',
+    appleMobileWebAppCapable: 'yes',
+    appleMobileWebAppStatusBarStyle: 'black',
     manifestOptions: {
-      background_color: "#ffffff"
+      background_color: '#ffffff',
     },
     workboxOptions: {
-      swSrc: "./src/sw.js",
-      swDest: "service-worker.js"
-    }
+      swSrc: './src/sw.js',
+      swDest: 'service-worker.js',
+    },
   },
 
-  transpileDependencies: ["vuetify"]
-};
+  transpileDependencies: ['vuetify'],
+}
