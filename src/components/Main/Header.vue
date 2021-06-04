@@ -6,7 +6,7 @@
       <v-icon>{{ getIconTitle }}</v-icon>
       {{ info.title }} {{ $route.name }}
     </v-toolbar-title>
-
+    
     <v-spacer />
 
     <v-btn v-for="(item, i) in icons" :key="i" icon>
@@ -17,11 +17,9 @@
       <v-icon v-if="this.$vuetify.theme.dark"> mdi-brightness-7 </v-icon>
       <v-icon v-else> mdi-brightness-4 </v-icon>
     </v-btn>
-    <v-select v-model="$i18n.locale" class="lang-selection">
-      <option v-for="(lang, i) in langs" :key="`Lang${i}`" :value="lang">
-        {{ lang }}
-      </option>
-    </v-select>
+    <v-btn @click="setLanguage($i18n.locale)" v-model="$i18n.locale">
+      {{ $i18n.locale }}
+    </v-btn>
 
     <!-- <v-switch
       v-model="darkMode"
@@ -47,7 +45,6 @@ export default {
   data() {
     return {
       darkMode: true,
-      langs: ['en', 'ru'],
       icons: [
         {
           icon: 'mdi-magnify',
@@ -61,7 +58,6 @@ export default {
       ],
     }
   },
-
   computed: {
     ...mapGetters({ info: 'getMenuInfo' }),
     getIconTitle() {
@@ -103,6 +99,12 @@ export default {
 
   methods: {
     ...mapMutations(['toggle']),
+    setLanguage(val) {
+      const [en, ru] = this.$i18n.availableLocales
+
+      if (val === en) this.$i18n.locale = ru
+      if (val === ru) this.$i18n.locale = en
+    },
     setDarkMode() {
       let metaThemeColor = document.querySelector('meta[name=theme-color]')
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark

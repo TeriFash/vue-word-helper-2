@@ -18,6 +18,13 @@ module.exports = {
       preProcessor: 'sass',
       patterns: [path.resolve(__dirname, './src/sass/main.scss')],
     },
+    i18n: {
+      locale: 'en',
+      fallbackLocale: 'ru',
+      localeDir: 'locales',
+      enableInSFC: true,
+      enableLegacy: false,
+    },
   },
   configureWebpack: {
     plugins: [],

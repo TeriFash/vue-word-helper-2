@@ -25,7 +25,7 @@ module.exports = {
   },
   plugins: ['vue', 'prettier'],
   rules: {
-    // 'vue/html-indent': 'off',
+    'vue/html-indent': 'off',
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'prettier/prettier': 'error',

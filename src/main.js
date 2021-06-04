@@ -6,7 +6,7 @@ import store from './store'
 import plugins from './plugins'
 import VueClipboard from 'vue-clipboard2'
 import VueMeta from 'vue-meta'
-import i18n from '@/plugins/i18n'
+// import i18n from '@/plugins/i18n'
 
 Vue.config.productionTip = false
 Vue.use(VueClipboard)
@@ -26,6 +26,7 @@ Vue.use(VueMeta, {
 // };
 
 new Vue({
+  // i18n,
   router,
   store,
   ...plugins,
