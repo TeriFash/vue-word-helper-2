@@ -34,7 +34,7 @@
 
 <script>
 import { mapActions } from 'vuex'
-import { firebase } from '@firebase/app'
+// import { firebase } from '@firebase/app'
 import '@firebase/firestore'
 
 export default {
@@ -77,9 +77,9 @@ export default {
         cost: '{ $cost }',
         time: '{ $time }',
       }
-      const newHeader = `<span class='mark'>${
-        this.hendler ? this.hendler : '{ name }'
-      }</span>`
+      const newHeader = this.hendler
+        ? this.hendler
+        : '<span class="mark">{ name }</span>'
       const newHeaderFixer = `${newHeader[0].toUpperCase()}${newHeader.slice(
         1
       )}`

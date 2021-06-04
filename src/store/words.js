@@ -71,7 +71,9 @@ const actions = {
       let createLength
 
       const { section, text } = payload
-      const sectionsDB = await this._vm.$db.collection('sections').doc(section)
+      const sectionsDB = await this._vm.$firestore
+        .collection('sections')
+        .doc(section)
       const counter = await sectionsDB.get().then(querySnapshot => {
         createLength = querySnapshot.data()
 
@@ -93,7 +95,7 @@ const actions = {
   async DELETE_WORD({ commit }, payload) {
     try {
       const { section, id } = payload
-      const sectionsDB = this._vm.$db.collection('sections').doc(section)
+      const sectionsDB = this._vm.$firestore.collection('sections').doc(section)
       const locId = id + 1
       // console.log(' ---➜ id ', id)
       await sectionsDB.update({
@@ -129,7 +131,6 @@ const actions = {
     // const result = [];
     try {
       const result = await this._vm.$sections
-      console.log('🚀 ~ FETCH_SECTIONS ~ result', result)
 
       let resultVal = {}
       result.forEach(item => {
@@ -138,6 +139,7 @@ const actions = {
       })
 
       const { simple, accompanying, rare } = resultVal
+      console.log(' ---➜ resultVal ', resultVal)
 
       // let resultSorte = Object.fromEntries(Object.entries(result).sort((a, b) => b[1].length - a[1].length));
 

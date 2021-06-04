@@ -5,7 +5,7 @@
         v-for="(word, i) in words"
         :key="i"
         :hendler="hendlerText || clipboarText || isHeader"
-        :text="word.text"
+        :text="word"
         :text-key="[i, words.length]"
         @dialog="onDialog"
       />

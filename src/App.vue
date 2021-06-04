@@ -37,6 +37,10 @@ export default {
       ? (this.$vuetify.theme.dark = true)
       : (this.$vuetify.theme.dark = false)
   },
+  async mounted() {
+    const data = await this.$db
+    console.log('--------', data)
+  },
   created() {
     document.addEventListener('swUpdated', this.showRefreshUI, { once: true })
     // Refresh all open app tabs when a new service worker is installed.
