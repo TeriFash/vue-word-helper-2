@@ -22,7 +22,7 @@
       <v-card-text>
         <v-container>
           <v-row>
-            <v-col cols="12" sm="12" md="6">
+            <v-col cols="12" sm="12" md="12">
               <v-text-field
                 v-model="text"
                 hint="required text*"
@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'AddWord',
@@ -60,6 +60,9 @@ export default {
       text: '',
     }
   },
+  computed: {
+    ...mapGetters({ tabActive: 'getTabActive' }),
+  },
   methods: {
     ...mapActions({ addWord: 'ADD_WORD' }),
     close() {
@@ -67,14 +70,12 @@ export default {
       this.dialog = false
     },
     async addWordSubmit() {
-      const tabActive = this.$store.state.words.tabActive
-      if (this.text && tabActive) {
-        const tab = tabActive.split('-')
-        await this.addWord({ text: this.text, section: tab[1] })
-        this.$store.commit('showSnackbar', 'Document successfully written!')
+      if (this.text && this.tabActive) {
+        await this.addWord({ text: this.text, section: this.tabActive })
+
         this.close()
       } else {
-        this.$store.commit('showSnackbar', 'Document Error!')
+        console.log('Document error!')
       }
     },
   },

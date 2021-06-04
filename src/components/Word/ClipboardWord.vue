@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 // import { firebase } from '@firebase/app'
 import '@firebase/firestore'
 
@@ -61,6 +61,7 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({ tabActive: 'getTabActive' }),
     setLine() {
       const index = this.textKey[0] + 1
 
@@ -95,11 +96,8 @@ export default {
       }
     },
     async doDelete() {
-      const tabActive = this.$store.state.words.tabActive
-
       try {
-        const tab = tabActive.split('-')
-        await this.deleteWord({ id: this.textKey[0], section: tab[1] })
+        await this.deleteWord({ id: this.textKey[0], section: this.tabActive })
         await this.$copyText(this.$refs.text.innerHTML)
         this.$emit('dialog', 'success')
       } catch (error) {

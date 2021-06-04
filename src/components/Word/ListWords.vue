@@ -6,7 +6,7 @@
         :key="i"
         :hendler="hendlerText || clipboarText || isHeader"
         :text="word"
-        :text-key="[i, words.length]"
+        :text-key="[i++, listLength[tabActive]]"
         @dialog="onDialog"
       />
     </v-list>
@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions, mapState } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 const DialogInfo = () => import('@/components/Global/DialogInfo')
 const ClipboardWord = () => import('@/components/Word/ClipboardWord')
 export default {
@@ -62,8 +62,12 @@ export default {
     window.removeEventListener('blur', this.onWindowBlur)
   },
   computed: {
-    ...mapState(['textInClipboard']),
-    ...mapGetters(['getClipboardData']),
+    // ...mapState(['textInClipboard']),
+    ...mapGetters({
+      getClipboardData: 'getClipboardData',
+      listLength: 'getWordListLength',
+      tabActive: 'getTabActive',
+    }),
     isHeader() {
       return this.getClipboardData || ''
     },

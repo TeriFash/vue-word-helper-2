@@ -11,10 +11,10 @@
       dark
     >
       <v-tabs-slider color="deep-purple"></v-tabs-slider>
-      <v-tab v-for="(item, i) in list" :key="i" :href="`#tab-${i}`">
+      <v-tab v-for="(item, i) in list" :key="i" :href="`#${i}`">
         <v-badge
           color="deep-purple"
-          :content="list[i].length"
+          :content="listLength[i]"
           left
           offset-y="0"
           offset-x="-5"
@@ -24,7 +24,7 @@
       </v-tab>
     </v-tabs>
     <v-tabs-items v-model="tab">
-      <v-tab-item v-for="(item, i) in list" :key="i" :value="`tab-${i}`">
+      <v-tab-item v-for="(item, i) in list" :key="i" :value="`${i}`">
         <list-words :words="list[i]" />
       </v-tab-item>
     </v-tabs-items>
@@ -57,10 +57,7 @@ export default {
   },
   computed: {
     ...mapState(['tabActive']),
-    ...mapGetters({ list: 'getSectionsList' }),
-    // list() {
-    //   return this.$store.state.words.sections;
-    // }
+    ...mapGetters({ list: 'getSectionsList', listLength: 'getWordListLength' }),
   },
 }
 </script>
