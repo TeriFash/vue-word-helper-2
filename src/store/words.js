@@ -1,5 +1,3 @@
-// import { firebase } from '@firebase/app'
-import '@firebase/firestore'
 import service from '@/services/appservices'
 
 const state = {

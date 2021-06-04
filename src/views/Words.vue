@@ -13,6 +13,14 @@ const TabsWord = () => import('@/components/Word/TabsWord.vue')
 const DataEmpty = () => import('@/components/Global/DataEmpty')
 export default {
   name: 'Words',
+  metaInfo: {
+    title: 'Words',
+    titleTemplate: '%s - Lets Words!',
+    htmlAttrs: {
+      lang: 'en',
+      amp: true,
+    },
+  },
   components: {
     FieldAddWord,
     TabsWord,
