@@ -1,0 +1,32 @@
+{
+  "add_word_placeholder": "Add Word",
+  "title": "Return Calculator",
+  "version_label": "Last Update",
+  "tax_switch": "Include 25% Taxes (Germany)",
+  "data_button": "Data",
+  "calculation_button": "Calculation",
+  "capital_input": "Starting Capital",
+  "monthly_input": "Savings / monthly",
+  "earnings_input": "Earnings / year",
+  "age_input": "Age",
+  "future_age_input": "Future Age",
+  "capital": "Capital",
+  "years": "Years",
+  "disclaimer": "Under the assumption that there are not transaction fees.",
+  "timespan": "Timespan",
+  "investment": "Investment",
+  "yield": "Yield",
+  "earnings": "Return",
+
+  "text_1": [
+    "In",
+    "years",
+    "with an total investment of",
+    "you would have a",
+    "yield-rate or",
+    "of earnings, when removing",
+    "taxes you would have a total capital of"
+  ],
+
+  "text_2": ["The average return on the", "over the last", "years", "was", ""]
+}

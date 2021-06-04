@@ -8,6 +8,8 @@ firebase.initializeApp(firebaseConfig)
 
 const db = firebase.firestore()
 
+db.settings({ timestampsInSnapshots: true })
+
 const firebaseApi = {
   install(Vue) {
     Object.defineProperty(Vue.prototype, '$firebase', { value: firebase })

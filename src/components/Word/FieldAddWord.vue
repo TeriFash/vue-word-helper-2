@@ -3,7 +3,7 @@
     v-model="title"
     class="pa-6 px-0"
     outlined
-    label="Add Word"
+    :label="$t('add_word_placeholder')"
     hide-details
     clearable
     @click:clear="clearWord"

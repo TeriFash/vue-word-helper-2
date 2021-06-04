@@ -17,6 +17,11 @@
       <v-icon v-if="this.$vuetify.theme.dark"> mdi-brightness-7 </v-icon>
       <v-icon v-else> mdi-brightness-4 </v-icon>
     </v-btn>
+    <v-select v-model="$i18n.locale" class="lang-selection">
+      <option v-for="(lang, i) in langs" :key="`Lang${i}`" :value="lang">
+        {{ lang }}
+      </option>
+    </v-select>
 
     <!-- <v-switch
       v-model="darkMode"
@@ -42,6 +47,7 @@ export default {
   data() {
     return {
       darkMode: true,
+      langs: ['en', 'ru'],
       icons: [
         {
           icon: 'mdi-magnify',
